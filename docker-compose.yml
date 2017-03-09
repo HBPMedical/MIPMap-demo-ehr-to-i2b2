@@ -1,6 +1,5 @@
-#                    Copyright (c) 2016-2016
-#   Data Intensive Applications and Systems Labaratory (DIAS)
-#            Ecole Polytechnique Federale de Lausanne
+#                    Copyright (c) 2017-2017
+#                      LREN CHUV, Lausanne
 #
 #                      All Rights Reserved.
 #
@@ -16,7 +15,7 @@
 # DISCLAIM ANY LIABILITY OF ANY KIND FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE
 # USE OF THIS SOFTWARE.
 
-version: '2'
+version: '2.1'
 # the following environment variables are expected to be available when running
 # docker-compose up
 # - mipmap_source: The folder containing the data to convert and the associated configuration
@@ -28,22 +27,56 @@ version: '2'
 
 services:
 
-  MIPMap:
+  mipmap_db:
     image: "postgres"
     container_name: "mip-postgres"
     restart: unless-stopped
-    volumes:
-        - "${mipmap_db}:/var/lib/postgresql/data:rw"
+    ports:
+      - 5432
     environment:
-        - POSTGRES_USER=mipmap
-        - POSTGRES_PASSWORD=mipmap
+      - POSTGRES_USER=mipmap
+      - POSTGRES_PASSWORD=mipmap
 
-  MIPMap:
+  i2b2_db:
+    image: "postgres"
+    container_name: "i2b2-postgres"
+    restart: unless-stopped
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=i2b2
+      - POSTGRES_PASSWORD=i2b2
+
+  wait_dbs:
+    image: "waisbrot/wait"
+    links:
+      - "mipmap_db:mipmap_db"
+      - "i2b2_db:i2b2_db"
+    environment:
+      - TARGETS=mipmap_db:5432,i2b2_db:5432
+
+  i2b2_setup:
+    image: "hbpmip/i2b2-setup:1.4.5"
+    container_name: "i2b2-setup"
+    command: "upgrade head"
+    links:
+      - "i2b2_db:i2b2_db"
+    environment:
+      - DB_URL=postgresql://i2b2:i2b2@i2b2_db:5432/postgres
+
+  mipmap_etl:
     image: "hbpmip/mipmap-demo-ehr-to-i2b2"
     container_name: "mipmap"
     volumes:
-     - "${mipmap_source:-./source}:/opt/source:ro"
-     - "${mipmap_pgproperties:-./postgresdb.properties}:/opt/postgresdb.properties:ro"
-     - "${mipmap_target:-./target}:/opt/target:rw"
+      - "${mipmap_source-./source}:/opt/source:ro"
+      - "${mipmap_pgproperties-./postgresdb.properties}:/opt/postgresdb.properties:ro"
+      - "${mipmap_target-./target}:/opt/target:rw"
+    environment:
+      - i2b2_db_host=i2b2_db
+      - i2b2_db_port=5432
+      - i2b2_db_name=i2b2
+      - i2b2_db_user=i2b2
+      - i2b2_db_password=i2b2
     links:
-     - "MIP-Postgres:db"
+      - "mipmap_db:db"
+      - "i2b2_db:i2b2_db"

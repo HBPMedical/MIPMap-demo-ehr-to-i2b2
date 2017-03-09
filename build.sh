@@ -6,4 +6,4 @@ else
   DOCKER="sudo docker"
 fi
 
-$DOCKER build -t hbpmip/mipmap --build-arg BUILD_DATE=$(date --iso-8601=seconds) .
+$DOCKER build -t hbpmip/mipmap-demo-ehr-to-i2b2 --build-arg BUILD_DATE=$(date --iso-8601=seconds) .

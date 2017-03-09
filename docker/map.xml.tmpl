@@ -55,9 +55,9 @@
     <type>Relational</type>
     <relational>
       <driver>org.postgresql.Driver</driver>
-      <uri>jdbc:postgresql://localhost/i2b2_datamart_original</uri>
-      <login>postgres</login>
-      <password>0000</password>
+      <uri>jdbc:postgresql://{{ .Env.i2b2_db_host }}:{{ default .Env.i2b2_db_port "5432" }}/{{ .Env.i2b2_db_name }}</uri>
+      <login>{{ default .Env.i2b2_db_user "postgres" }}</login>
+      <password>{{ default .Env.i2b2_db_password "postgres" }}</password>
     </relational>
     <inclusions />
     <exclusions />
