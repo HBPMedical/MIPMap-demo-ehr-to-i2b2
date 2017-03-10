@@ -1,4 +1,4 @@
-FROM hbpmip/mipmap
+FROM hbpmip/mipmap:0.3
 MAINTAINER Ludovic Claude <ludovic.claude@chuv.ch>
 
 COPY docker/map.xml.tmpl /opt/
