@@ -134,14 +134,6 @@
       <confidence>1.0</confidence>
     </correspondence>
     <correspondence>
-      <source-paths>
-        <source-path>Source.hospitalExam.hospitalExamTuple.date</source-path>
-      </source-paths>
-      <target-path>{{ .Env.i2b2_db_name }}.observation_fact.observation_factTuple.start_date</target-path>
-      <transformation-function>Source.hospitalExam.hospitalExamTuple.date</transformation-function>
-      <confidence>1.0</confidence>
-    </correspondence>
-    <correspondence>
       <source-paths />
       <source-value>"1"</source-value>
       <target-path>{{ .Env.i2b2_db_name }}.observation_fact.observation_factTuple.instance_num</target-path>
@@ -155,5 +147,14 @@
       <transformation-function>newId()</transformation-function>
       <confidence>1.0</confidence>
     </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Source.hospitalExam.hospitalExamTuple.date</source-path>
+      </source-paths>
+      <target-path>{{ .Env.i2b2_db_name }}.observation_fact.observation_factTuple.start_date</target-path>
+      <transformation-function>todate(Source.hospitalExam.hospitalExamTuple.date, "YYYY/MM/DD")</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
   </correspondences>
 </mappingtask>
+
