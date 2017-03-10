@@ -62,7 +62,7 @@ services:
     links:
       - "i2b2_db:i2b2_db"
     environment:
-      - DB_URL=postgresql://i2b2:i2b2@i2b2_db:5432/postgres
+      - DB_URL=postgresql://i2b2:i2b2@i2b2_db:5432/i2b2
 
   mipmap_etl:
     image: "hbpmip/mipmap-demo-ehr-to-i2b2"
