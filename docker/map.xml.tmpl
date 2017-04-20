@@ -77,7 +77,11 @@
     </correspondence>
     <correspondence>
       <source-paths />
-      <source-value>newId()</source-value>
+      <source-value>
+              newId()_seq1
+        <sequence>seq1</sequence>
+        <offset>0</offset>
+      </source-value>
       <target-path>{{ .Env.i2b2_db_name }}.observation_fact.observation_factTuple.encounter_num</target-path>
       <transformation-function>newId()</transformation-function>
       <confidence>1.0</confidence>
@@ -142,7 +146,10 @@
     </correspondence>
     <correspondence>
       <source-paths />
-      <source-value>newId()</source-value>
+      <source-value>newId()_seq1
+        <sequence>seq1</sequence>
+        <offset>0</offset>
+      </source-value>
       <target-path>{{ .Env.i2b2_db_name }}.observation_fact.observation_factTuple.text_search_index</target-path>
       <transformation-function>newId()</transformation-function>
       <confidence>1.0</confidence>
