@@ -29,7 +29,7 @@ services:
 
   mipmap_db:
     image: "postgres"
-    container_name: "mip-postgres"
+    container_name: "mipmap-postgres"
     restart: unless-stopped
     ports:
       - 5432
@@ -72,11 +72,16 @@ services:
       - "${mipmap_pgproperties-./postgresdb.properties}:/opt/postgresdb.properties:ro"
       - "${mipmap_target-./target}:/opt/target:rw"
     environment:
+      - mipmap_db_host=mipmap_db
+      - mipmap_db_port=5432
+      - mipmap_db_name=mipmap
+      - mipmap_db_user=mipmap
+      - mipmap_db_password=mipmap
       - i2b2_db_host=i2b2_db
       - i2b2_db_port=5432
       - i2b2_db_name=i2b2
       - i2b2_db_user=i2b2
       - i2b2_db_password=i2b2
     links:
-      - "mipmap_db:db"
+      - "mipmap_db:mipmap_db"
       - "i2b2_db:i2b2_db"

@@ -24,6 +24,6 @@ fi
 
 $DOCKER_COMPOSE up -d mipmap_db
 $DOCKER_COMPOSE up -d i2b2_db
-$DOCKER_COMPOSE up wait_dbs
-$DOCKER_COMPOSE up i2b2_setup
-$DOCKER_COMPOSE up mipmap_etl
+$DOCKER_COMPOSE run wait_dbs
+$DOCKER_COMPOSE run i2b2_setup
+$DOCKER_COMPOSE run mipmap_etl

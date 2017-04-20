@@ -2,10 +2,6 @@ FROM hbpmip/mipmap:0.6.0
 MAINTAINER Ludovic Claude <ludovic.claude@chuv.ch>
 
 ARG BUILD_DATE
-ARG EXPORT_CMD="-csv"
-ENV EXPORT_CMD=$EXPORT_CMD
-ARG EXPORT_PATH="/opt/target"
-ENV EXPORT_PATH=$EXPORT_PATH
 
 #ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
@@ -19,7 +15,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.docker.dockerfile="Dockerfile" \
     org.label-schema.schema-version="1.0"
 
-COPY docker/map.xml.tmpl /opt/
+COPY docker/map.xml.tmpl docker/mipmap-db.properties.tmpl docker/i2b2-db.properties.tmpl /opt/
 COPY docker/run.sh /run.sh
 
 CMD ["/run.sh"]
