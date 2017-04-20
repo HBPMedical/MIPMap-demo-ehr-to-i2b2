@@ -1,4 +1,4 @@
-mipmap:
+mipmap_demo:
   build: Dockerfile
   image: hbpmip/mipmap-demo-ehr-to-i2b2
   pre:
