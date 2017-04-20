@@ -1,4 +1,4 @@
-FROM hbpmip/mipmap:0.5.0
+FROM hbpmip/mipmap:0.6.0
 MAINTAINER Ludovic Claude <ludovic.claude@chuv.ch>
 
 ARG BUILD_DATE
