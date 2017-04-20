@@ -1,7 +1,12 @@
-FROM hbpmip/mipmap:0.4.2
+FROM hbpmip/mipmap:0.5.0
 MAINTAINER Ludovic Claude <ludovic.claude@chuv.ch>
 
 ARG BUILD_DATE
+ARG EXPORT_CMD="-csv"
+ENV EXPORT_CMD=$EXPORT_CMD
+ARG EXPORT_PATH="/opt/target"
+ENV EXPORT_PATH=$EXPORT_PATH
+
 #ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="hbpmip/mipmap-demo-ehr-to-i2b2" \
