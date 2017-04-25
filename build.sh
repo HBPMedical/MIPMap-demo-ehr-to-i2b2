@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
 
 if groups $USER | grep &>/dev/null '\bdocker\b'; then
   DOCKER="docker"
