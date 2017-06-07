@@ -3,6 +3,7 @@ machine:
     - docker
 dependencies:
   override:
+    - docker version
     - docker info
     - pip install --upgrade pip
     - pip install docker-compose==1.8.1
