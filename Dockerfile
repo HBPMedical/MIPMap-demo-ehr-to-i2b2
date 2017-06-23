@@ -8,7 +8,6 @@ COPY docker/map.xml.tmpl docker/mipmap-db.properties.tmpl docker/i2b2-db.propert
 COPY docker/run.sh /run.sh
 
 CMD ["/run.sh"]
-
 LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="hbpmip/mipmap-demo-ehr-to-i2b2" \
     org.label-schema.description="MIPMap configured to transform EHR demo data to I2B2" \
