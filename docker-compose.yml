@@ -56,7 +56,7 @@ services:
       - TARGETS=mipmap_db:5432,i2b2_db:5432
 
   i2b2_setup:
-    image: "hbpmip/i2b2-setup:1.4.5"
+    image: "hbpmip/i2b2-setup:1.4.9"
     container_name: "i2b2-setup"
     command: "upgrade head"
     links:
